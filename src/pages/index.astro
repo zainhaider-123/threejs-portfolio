@@ -1,0 +1,288 @@
+---
+import Base from '../layouts/Base.astro'
+import PaperScene from '../components/PaperScene.tsx'
+import Navbar from '../components/Navbar.tsx'
+import ScrollReveal from '../components/ScrollReveal.tsx'
+
+const projects = [
+  {
+    title: 'Paper Terrain',
+    description: 'An interactive paper diorama that responds to cursor movement, built with layered geometry and cel-shading.',
+    tags: ['Three.js', 'GLSL', 'R3F'],
+    color: 'oklch(0.55 0.12 150)',
+    number: '01',
+  },
+  {
+    title: 'Fluid Dynamics',
+    description: 'Real-time fluid simulation with WebGL compute shaders, exploring the beauty of mathematical flow patterns.',
+    tags: ['WebGL', 'Compute', 'WASM'],
+    color: 'oklch(0.50 0.14 235)',
+    number: '02',
+  },
+  {
+    title: 'Generative Landscapes',
+    description: 'Procedural terrain generation with biome-aware coloring and infinite scroll through noise-driven worlds.',
+    tags: ['Three.js', 'Procedural', 'Noise'],
+    color: 'oklch(0.60 0.14 55)',
+    number: '03',
+  },
+]
+---
+
+<Base>
+  <Navbar client:load />
+
+  {/* Fixed 3D background — stays visible always */}
+  <div class="fixed inset-0 z-0">
+    <PaperScene client:only="react" />
+  </div>
+
+  {/* Content overlay — scrolls over the 3D scene */}
+  <div class="relative z-10">
+    {/* ───────────────────────── Hero ───────────────────────── */}
+    <section
+      id="hero"
+      class="relative w-full overflow-hidden h-dvh flex flex-col items-center justify-center px-4"
+    >
+      {/* Text overlay with glass effect */}
+      <div class="text-center rounded-2xl p-lg bg-ink/40 backdrop-blur-md max-w-[52ch]">
+        <h1
+          class="font-bold mb-4 font-display text-hero text-ink leading-[1.05]"
+        >
+          Zain Haider
+        </h1>
+        <p
+          class="mx-auto font-body text-xl text-ink/80 max-w-[45ch] leading-[1.4]"
+        >
+          Crafting interactive 3D experiences for the web
+        </p>
+      </div>
+
+      {/* Subtle gradient fade at bottom of hero */}
+      <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent pointer-events-none"></div>
+
+      {/* Scroll indicator */}
+      <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-2">
+        <div class="w-px h-12 bg-gradient-to-b from-transparent to-ink/40 animate-pulse"></div>
+      </div>
+    </section>
+
+    {/* ───────────────────────── About ───────────────────────── */}
+    <section id="about" class="section-spacing bg-bg/85 backdrop-blur-sm">
+      <div class="content-container">
+        <ScrollReveal client:load>
+          <p class="font-body text-sm text-accent tracking-[0.15em] uppercase mb-4">About</p>
+          <h2 class="mb-8 font-display text-4xl text-ink max-w-[28ch]">
+            Building at the intersection of code and craft
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal client:load>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+            <div class="flex flex-col gap-6 font-body text-lg text-muted leading-[1.6]">
+              <p>
+                I'm Zain Haider — a creative technologist who builds interactive 3D experiences for the web.
+                I believe the browser is a canvas, and code is a craft. Something shaped by intention,
+                curiosity, and a willingness to explore the unknown.
+              </p>
+              <p>
+                With a background in both design and engineering, I bridge the gap between visual concepts
+                and technical implementation. Every project is an opportunity to discover what's possible
+                when creativity meets computation.
+              </p>
+              <p>
+                My work lives at the intersection of art and technology — where paper meets pixels,
+                where geometry tells stories, and where the web becomes something you can touch.
+              </p>
+            </div>
+            <div class="flex flex-col gap-6">
+              <div class="flex flex-col gap-2 p-6 rounded-lg border border-surface bg-surface/30">
+                <span class="font-display text-3xl text-accent font-bold">3+</span>
+                <span class="font-body text-sm text-muted">Years crafting interactive experiences</span>
+              </div>
+              <div class="flex flex-col gap-2 p-6 rounded-lg border border-surface bg-surface/30">
+                <span class="font-display text-3xl text-primary font-bold">WebGL</span>
+                <span class="font-body text-sm text-muted">Specializing in Three.js & real-time graphics</span>
+              </div>
+              <div class="flex flex-col gap-2 p-6 rounded-lg border border-surface bg-surface/30">
+                <span class="font-display text-3xl text-accent font-bold">∞</span>
+                <span class="font-body text-sm text-muted">Curiosity-driven, always exploring</span>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Skills/tech strip */}
+        <ScrollReveal client:load>
+          <div class="mt-xl flex flex-wrap gap-3">
+            {['Three.js', 'WebGL', 'GLSL', 'React', 'TypeScript', 'Astro', 'GSAP', 'Creative Coding'].map((skill) => (
+              <span class="font-body text-sm text-ink/70 bg-surface/50 border border-surface px-4 py-2 rounded-full">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+
+    {/* ───────────────────────── Projects ───────────────────────── */}
+    <section id="projects" class="section-spacing bg-surface/85 backdrop-blur-sm">
+      <div class="content-container">
+        <ScrollReveal client:load>
+          <p class="font-body text-sm text-accent tracking-[0.15em] uppercase mb-4">Work</p>
+          <h2 class="mb-4 font-display text-4xl text-ink">Selected Work</h2>
+          <p class="mb-12 font-body text-lg text-muted max-w-[55ch]">
+            Interactive experiments and production projects where craft meets code.
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal client:load stagger className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(320px,1fr))]">
+          {projects.map((project) => (
+            <article
+              class="group flex flex-col overflow-hidden transition-all duration-300 bg-bg/80 rounded-lg border border-surface/60 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:border-primary/30"
+            >
+              {/* Colored placeholder with project number and subtle pattern */}
+              <div
+                class="relative w-full h-[220px] rounded-t-lg overflow-hidden"
+                style={`background-color: ${project.color};`}
+              >
+                {/* Subtle diagonal lines pattern overlay */}
+                <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.3) 10px, rgba(255,255,255,0.3) 11px);"></div>
+                <div class="absolute bottom-4 right-4 font-display text-7xl font-bold text-white/15">
+                  {project.number}
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 p-6 flex-1">
+                <h3 class="font-semibold font-display text-xl text-ink">
+                  {project.title}
+                </h3>
+                <p class="font-body text-base text-muted leading-[1.5] flex-1">
+                  {project.description}
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      class="font-semibold font-body text-xs text-primary bg-surface/50 px-2.5 py-1 rounded tracking-[0.02em] border border-surface"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div class="mt-4 pt-4 border-t border-surface/50">
+                  <span class="font-body text-sm text-primary group-hover:text-accent transition-colors inline-flex items-center gap-1">
+                    View project
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform">
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </ScrollReveal>
+      </div>
+    </section>
+
+    {/* ───────────────────────── Contact ───────────────────────── */}
+    <section id="contact" class="section-spacing bg-bg/85 backdrop-blur-sm">
+      <div class="content-container">
+        <ScrollReveal client:load>
+          <p class="font-body text-sm text-accent tracking-[0.15em] uppercase mb-4">Contact</p>
+          <h2 class="mb-4 font-display text-4xl text-ink">
+            Let's Create Together
+          </h2>
+          <p class="mb-10 font-body text-lg text-muted max-w-[55ch] leading-[1.6]">
+            Always interested in new projects, collaborations, and creative challenges.
+            Whether you have an idea, a question, or just want to say hello — I'd love to hear from you.
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal client:load>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-xl">
+            {/* Email card */}
+            <a
+              href="mailto:zain@zainhaider.dev"
+              class="group flex flex-col gap-3 p-6 rounded-lg border border-surface bg-surface/30 hover:border-primary/40 transition-all"
+            >
+              <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </div>
+                <span class="font-display text-lg text-ink">Email</span>
+              </div>
+              <span class="font-body text-muted group-hover:text-ink transition-colors">zain@zainhaider.dev</span>
+            </a>
+
+            {/* GitHub card */}
+            <a
+              href="https://github.com/zainhaider"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col gap-3 p-6 rounded-lg border border-surface bg-surface/30 hover:border-primary/40 transition-all"
+            >
+              <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                    <path d="M9 18c-4.51 2-5-2-7-2" />
+                  </svg>
+                </div>
+                <span class="font-display text-lg text-ink">GitHub</span>
+              </div>
+              <span class="font-body text-muted group-hover:text-ink transition-colors">@zainhaider</span>
+            </a>
+
+            {/* Twitter card */}
+            <a
+              href="https://twitter.com/zainhaider"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col gap-3 p-6 rounded-lg border border-surface bg-surface/30 hover:border-primary/40 transition-all"
+            >
+              <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                  </svg>
+                </div>
+                <span class="font-display text-lg text-ink">Twitter</span>
+              </div>
+              <span class="font-body text-muted group-hover:text-ink transition-colors">@zainhaider</span>
+            </a>
+
+            {/* LinkedIn card */}
+            <a
+              href="https://linkedin.com/in/zainhaider"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col gap-3 p-6 rounded-lg border border-surface bg-surface/30 hover:border-primary/40 transition-all"
+            >
+              <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </div>
+                <span class="font-display text-lg text-ink">LinkedIn</span>
+              </div>
+              <span class="font-body text-muted group-hover:text-ink transition-colors">Connect with me</span>
+            </a>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  </div>
+
+  {/* ───────────────────────── Footer ───────────────────────── */}
+  <footer
+    class="relative z-10 py-8 text-center bg-surface text-muted font-body text-sm"
+  >
+    <p>Built with Three.js & Astro</p>
+    <p class="mt-2">&copy; {new Date().getFullYear()} Zain Haider</p>
+  </footer>
+</Base>

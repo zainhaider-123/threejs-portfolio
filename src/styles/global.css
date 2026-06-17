@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: oklch(0.60 0.16 235);    /* Brighter indigo for dark bg */
+  --color-accent: oklch(0.75 0.16 55);       /* Brighter amber for dark bg */
+  --color-bg: oklch(0.12 0.015 235);         /* Deep indigo-black */
+  --color-surface: oklch(0.17 0.02 235);     /* Slightly lighter dark */
+  --color-ink: oklch(0.95 0.01 235);          /* Near-white text */
+  --color-muted: oklch(0.62 0.02 235);       /* Medium gray text on dark */
+
+  /* Scene colors */
+  --color-scene-paper: oklch(0.950 0.010 80);
+  --color-scene-paper2: oklch(0.900 0.020 75);
+  --color-scene-shadow: oklch(0.700 0.020 60);
+  --color-scene-outline: oklch(0.200 0.030 230);
+  --color-scene-warm: oklch(0.750 0.120 55);
+  --color-scene-cool: oklch(0.650 0.100 235);
+  --color-scene-sky: oklch(0.850 0.040 230);
+  --color-scene-green: oklch(0.550 0.100 150);
+
+  /* Fonts */
+  --font-display: "Bricolage", sans-serif;
+  --font-body: "Source Sans 3", sans-serif;
+
+  /* Font sizes */
+  --text-xs: clamp(0.75rem, 0.70rem + 0.25vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.82rem + 0.30vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.05rem + 0.38vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.10rem + 0.75vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.20rem + 1.50vw, 2rem);
+  --text-3xl: clamp(1.875rem, 1.40rem + 2.40vw, 2.75rem);
+  --text-4xl: clamp(2.25rem, 1.50rem + 3.75vw, 4rem);
+  --text-hero: clamp(2.75rem, 1.00rem + 7.50vw, 6rem);
+
+  /* Spacing */
+  --spacing-xs: clamp(0.25rem, 0.20rem + 0.25vw, 0.375rem);
+  --spacing-sm: clamp(0.5rem, 0.40rem + 0.50vw, 0.75rem);
+  --spacing-md: clamp(1rem, 0.80rem + 1.00vw, 1.5rem);
+  --spacing-lg: clamp(2rem, 1.50rem + 2.50vw, 3rem);
+  --spacing-xl: clamp(3rem, 2.00rem + 5.00vw, 5rem);
+  --spacing-2xl: clamp(5rem, 3.00rem + 10.00vw, 8rem);
+
+  /* Transitions */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-fast: 0.2s;
+  --duration-base: 0.4s;
+  --duration-slow: 0.6s;
+}
+
+/* ─── Layout Variables ─── */
+:root {
+  --max-width: 1200px;
+  --content-width: 65ch;
+}
+
+/* ─── Base Styles ─── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-ink);
+    background-color: var(--color-bg);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--text-hero);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    font-size: var(--text-4xl);
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: var(--text-2xl);
+    font-weight: 500;
+  }
+
+  p {
+    max-width: var(--content-width);
+    text-wrap: pretty;
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out-quart);
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+/* ─── Utility Classes ─── */
+.section-spacing {
+  padding-block: var(--spacing-2xl);
+}
+
+.content-container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--spacing-md);
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
